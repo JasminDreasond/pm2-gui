@@ -4,7 +4,9 @@ pm2-gui [![NPM version](https://badge.fury.io/js/pm2-gui.svg)](http://badge.fury
 An elegant web & terminal interface for Unitech/PM2.
 
 > Compatible with PM2 v0.12.7+
+
 > If you wanna update to pm2-gui@latest, make sure you've read the [change logs](CHANGELOG.md).
+
 > You can track lifecycle by [pm2-ant](https://github.com/Tjatse/pm2-ant)
 
 ![image](screenshots/pm2-gui.gif)
@@ -21,8 +23,9 @@ An elegant web & terminal interface for Unitech/PM2.
 
 ![image](screenshots/design.jpg)
 
-<a name="feats" />
+<a name="feats"></a>
 # Features
+
 - Curses-like dashboard.
 - Remoting monitor / web control.
 - All the heartbeats (no matter **monitor** or **tail (logs)**) are automatic destroyed.
@@ -37,13 +40,15 @@ An elegant web & terminal interface for Unitech/PM2.
 - Supports [ANSI color codes](#ss_logs) by [ansi-html](https://github.com/Tjatse/ansi-html).
 - High performance. In my case, there are near one hundred processes, but `pm2-gui` works without any suck.
 
-<a name="cauts" />
+<a name="cauts"></a>
 # Cautions
+
 - Web Interface is wrote by CSS3 && HTML5, so view it with the latest version of the browser (WebGL, Animation, WebSocket supports), e.g. Chrome, Safari and Firefox.
 - I've never test it on Internet Explorer / Windows.
 
-<a name="ins" />
+<a name="ins"></a>
 # Installation
+
 ```bash
 $ npm install pm2-gui -g
 $ pm2-gui <cmd> [options]
@@ -58,8 +63,9 @@ $ npm install --production
 $ ./pm2-gui <cmd> [options]
 ```
 
-<a name="usage" />
+<a name="usage"></a>
 # Usage
+
 Run the following command to get usage helps:
 ```bash
 $ pm2-gui
@@ -78,12 +84,14 @@ pm2GUI.startAgent([ini_config_file]);
 pm2GUI.dashboard([ini_config_file]);
 ```
 
-<a name="config" />
+<a name="config"></a>
 # Configuration
+
 Edit the `pm2-gui/pm2-gui.ini` file or copy the [config example](./pm2-gui.ini) to `/etc/pm2-gui.ini` (starting with `pm2-gui start /etc/pm2-gui.ini`):
 
-<a name="ui" />
+<a name="ui"></a>
 # UI/UX
+
 - Amazing and smooth animations.
 - High performance.
 
@@ -115,10 +123,11 @@ Tail Logs
 
 ![image](screenshots/logs.jpg)
 
-<a name="serv" />
+<a name="serv"></a>
+
 # Serving apps locally with nginx and custom domain
 - [simple](examples/nginx/pm.example.com.conf)
-- [advantage](examples/nginx/pm2.example.com.conf)
+- [advanced](examples/nginx/pm2.example.com.conf)
 
 ## Test
 ```bash
@@ -126,15 +135,13 @@ $ npm test
 ```
 
 ## License
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+(The MIT License)
 
-    http://www.apache.org/licenses/LICENSE-2.0
+Copyright (c) 2014-2016 Tjatse
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
