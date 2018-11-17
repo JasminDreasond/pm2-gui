@@ -87,7 +87,7 @@ pm2GUI.dashboard([ini_config_file]);
 <a name="config"></a>
 # Configuration
 
-Edit the `pm2-gui/pm2-gui.ini` file or copy the [config example](./pm2-gui.ini) to `/etc/pm2-gui.ini` (starting with `pm2-gui start /etc/pm2-gui.ini`):
+Edit the `pm2-gui/pm2-gui.ini` file and `pm2-gui/discordWhitelist.json` file (Optional) or copy the [config example](./pm2-gui.ini) and the discordWitelist.json to `/etc/pm2-gui.ini` (starting with `pm2-gui start /etc/pm2-gui.ini`):
 
 <a name="ui"></a>
 # UI/UX
