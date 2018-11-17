@@ -50,13 +50,13 @@ An elegant web & terminal interface for Unitech/PM2.
 # Installation
 
 ```bash
-$ npm install pm2-gui -g
+$ npm install JasminDreasond/pm2-gui-better -g
 $ pm2-gui <cmd> [options]
 # or
-$ npm install pm2-gui --production
+$ npm install JasminDreasond/pm2-gui-better --production
 $ cd node_modules/pm2-gui
 # or (recommends)
-$ git clone https://github.com/Tjatse/pm2-gui.git
+$ git clone https://github.com/JasminDreasond/pm2-gui-better.git
 $ cd pm2-gui
 $ npm install --production
 # run monitor
