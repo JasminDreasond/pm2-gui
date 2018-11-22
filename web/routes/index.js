@@ -102,65 +102,95 @@ module.exports = function(tinyport) {
     }
 
     var allowDomains = ''
+    var allowDomains2 = ''
 
     if (typeof tinyMnt.options.allowdomains == "string") {
 
         var allowDomainsX = tinyMnt.options.allowdomains.replace(/ /g, "").split(',')
         if (allowDomainsX.length > 0) {
             for (var i = 0; i < allowDomainsX.length; i++) {
+
                 allowDomains += ' ' + allowDomainsX[i]
+                allowDomains2 += ' ' + allowDomainsX[i]
+
             }
         }
 
     }
 
     var createHostname = function(ip) {
-        if ((typeof ip == "string") && (ip.indexOf(df_values_s.host.replace("http://", "").replace("https://", "")) < 0)) {
-
-            if (typeof ip.split("@")[1] == "string") {
-                var newURL = ip.split("@")[1]
-            } else {
-                var newURL = ip
-            }
-
-            if (df_values_s.upgradeInsecure != '') {
-                newURL = 'https://' + newURL
-            } else {
-                newURL = 'https://' + newURL + ' http://' + newURL
-            }
-
-            return newURL
-
-        } else { return ''; }
-    }
-
-    if (typeof tinyMnt.options.server_name == "string") {
-        var newTinyip = createHostname(tinyMnt.options.server_name)
-        if (newTinyip != '') {
-            allowDomains += ' ' + newTinyip
+        if (df_values_s.upgradeInsecure != '') {
+            var newURL = 'https://' + ip
+            return [newURL + ' wss://' + ip, newURL]
+        } else {
+            var newURL = 'https://' + ip + ' http://' + ip
+            return [newURL + ' wss://' + ip + ' ws://' + ip, newURL]
         }
     }
 
-    for (var opsItems in tinyMnt.options) {
-        if ((opsItems != 'pm2') && (typeof tinyMnt.options[opsItems] == "string") && (opsItems.startsWith('pm2'))) {
-            var newTinyip = createHostname(tinyMnt.options[opsItems])
-            if (newTinyip != '') {
-                allowDomains += ' ' + newTinyip
+    if (df_values_s.host.startsWith("https://")) {
+        var hostnameclean = df_values_s.host.substring(8, df_values_s.host.length)
+    } else if (df_values_s.host.startsWith("http://")) {
+        var hostnameclean = df_values_s.host.substring(7, df_values_s.host.length)
+    }
+
+    var urlProtectGenerator = function(tinyip) {
+        if (typeof tinyip == "string") {
+
+            if (typeof tinyip.split("@")[1] == "string") {
+                var tinyip = tinyip.split("@")[1]
+            } else {
+                var tinyip = tinyip
+            }
+
+            if (tinyip.startsWith("https://")) {
+                tinyip = tinyip.substring(8, tinyip.length)
+            } else if (tinyip.startsWith("http://")) {
+                tinyip = tinyip.substring(7, tinyip.length)
+            }
+
+            if (tinyip != hostnameclean) {
+
+                var newTinyip = createHostname(tinyip)
+                if (newTinyip[0] != '') {
+                    allowDomains += ' ' + newTinyip[0]
+                    allowDomains2 += ' ' + newTinyip[1]
+                }
+
+            }
+
+        }
+    }
+
+    if (typeof tinyMnt.options.remotes != undefined) {
+
+        if (typeof tinyMnt.options.remotes.server_name == "string") {
+            urlProtectGenerator(tinyMnt.options.remotes.server_name)
+        }
+
+        for (var opsItems in tinyMnt.options.remotes) {
+            if ((opsItems != 'pm2') && (typeof tinyMnt.options.remotes[opsItems] == "string") && (opsItems.startsWith('pm2'))) {
+                urlProtectGenerator(tinyMnt.options.remotes[opsItems])
             }
         }
+
     }
 
     if ((typeof allowDomains != 'string') || (allowDomains == '')) { var allowDomains = ' ' }
+    if ((typeof allowDomains2 != 'string') || (allowDomains2 == '')) { var allowDomains = ' ' }
     delete allowDomainsX
     delete createHostname
+    delete urlProtectGenerator
+    delete hostnameclean
     delete newTinyip
 
-    var httpsInfo = df_values_s.upgradeInsecure + 'default-src' + allowDomains + ' ' + df_values_s.httplist + ' ' + df_values_s.unsafe + '; img-src' + allowDomains + ' ' + df_values_s.safeimg
+    var httpsInfo = df_values_s.upgradeInsecure + 'default-src' + allowDomains + ' ' + df_values_s.httplist + ' ' + df_values_s.unsafe + '; img-src' + allowDomains2 + ' ' + df_values_s.safeimg
     delete df_values_s;
 
     // Finish Get Config
     delete tinyMnt
     delete allowDomains
+    delete allowDomains2
 
     // Authorization
     action(function auth(req, res) {
