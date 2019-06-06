@@ -497,6 +497,14 @@ END OF REPO && VER
   color: #f0ad4e;
   width: 30px;
 }
+.proc-info ul.proc-content li.proc-cpu {
+  color: #f0ad4e;
+  width: 30px;
+}
+.proc-info ul.proc-content li.proc-cpu::after {
+  content: "%";
+  color: #f0ad4e;
+}
 
 .proc-info ul.proc-content li.proc-uptime {
   color: #888;
