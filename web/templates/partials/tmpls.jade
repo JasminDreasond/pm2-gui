@@ -43,6 +43,7 @@ script#procTmp(type='text/html')
           span!= '<%- mode %>'
         li.proc-mem!= '<%- getMem(proc.monit.memory) %>'
         li.proc-restart!= '<%- proc.pm2_env.restart_time %>'
+        li.proc-cpu!= '<%- proc.monit.cpu %>'
         li.proc-uptime
           | [
           span(data-ctime!='<%- proc.pm2_env.pm_uptime %>', data-running!="<%- proc.pm2_env.status == 'online' ? 'YES':'NO' %>") 0s
